@@ -8,7 +8,7 @@ class HospitalDiarySerializer(serializers.ModelSerializer):
             'id',
             'image',
             'hospital_name',
-            'title',
+            'body',
             'created_at',
             'required'
         )
