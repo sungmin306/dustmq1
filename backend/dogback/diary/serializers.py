@@ -3,6 +3,8 @@ from . models import Diary
 
 
 class DiarySerializers(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source = 'user.username')
+    #petwalknum = serializers.ReadOnlyField(source = 'petwalknum')
     class Meta:
-        fields = ('day', 'image', 'context','pet_walk','pet_walk_num')
+        fields = ('day', 'image', 'context','petwalk','user','petwalknum')
         model = Diary

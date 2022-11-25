@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DogAccount, DogWeight
+from .models import DogAccount#, DogWeight
 class Dog_accountSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
@@ -17,12 +17,12 @@ class Dog_accountSerializer(serializers.ModelSerializer):
         )
         model = DogAccount
 
-class DogWeightSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = (
-            'pet_weight_days', 'pet_weight'
-        )
-        model = DogWeight
+# class DogWeightSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         fields = (
+#             'pet_weight_days', 'pet_weight'
+#         )
+#         model = DogWeight
 
 
 

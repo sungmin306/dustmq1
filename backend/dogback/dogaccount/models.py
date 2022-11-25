@@ -46,8 +46,7 @@ class DogAccount(models.Model):
     petdesex = models.CharField(null = True , blank = True, max_length=1, choices = PET_DESEX_CHOICE) # 중성화여부
     petimage = models.ImageField(null=True, blank = True) # 사진
     noseprint = models.CharField(null=True, blank = True, max_length=1, choices = PET_NOSE_PRINT )#비문 등록 추가 여부
-
-class DogWeight(models.Model):
-    dogprofile = models.ForeignKey(DogAccount, on_delete=models.CASCADE, default='', related_name = 'weights')
-    weightday = models.DateField(null = True, blank = True) # 몸무게 기록하려는 날짜
-    newweight = models.FloatField()
+    noseimage = models.ImageField(null = True, blank = True) #비문 사진
+# class DgoNoseImage(models.Model):
+#     dogprofile = models.ForeignKey(DogAccount, on_delete=models.CASCADE, default='', related_name = 'weights')
+#     noseimage = models.ImageField()
