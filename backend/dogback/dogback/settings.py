@@ -35,7 +35,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-0n!*vkk8wb0yls7@6e)+m-h6m%6$zl_kob22i1yzg#+7zmi)^3'
+SECRET_KEY = 'django-insecure-0n!*vkk8wb0yls7@6e)+m-h6m%6$zl_kob22i1yzg#+7zmi)^3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'dogaccount',
     'animal_hospital',
     'diary',
+    'yolov05',
     
 ]
 SITE_ID = 1
@@ -115,7 +116,7 @@ REST_FRAMEWORK = {
 REST_USE_JWT = True
 # DATABASES = my_settings.DATABASES
 # SECRET_KEY = my_settings.SECRET_KEY
-SECRET_KEY = 'django-insecure-0n!*vkk8wb0yls7@6e)+m-h6m%6$zl_kob22i1yzg#+7zmi)^3'
+#SECRET_KEY = 'django-insecure-0n!*vkk8wb0yls7@6e)+m-h6m%6$zl_kob22i1yzg#+7zmi)^3'
 #JWT 인증
 JWT_AUTH = {
     'JWT_SECRET_KEY': SECRET_KEY,

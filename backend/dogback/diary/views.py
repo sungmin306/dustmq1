@@ -12,7 +12,6 @@ from django.http import JsonResponse
 from django.db.models import Q
 
 # Create your views here.
-
 class DiaryViewSet(viewsets.ModelViewSet): #viewset 활용 CRUD
     serializer_class = DiarySerializers
     queryset = Diary.objects.all()

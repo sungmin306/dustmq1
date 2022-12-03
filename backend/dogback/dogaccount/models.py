@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 '''
-delete migration
+delete database 명령어
 find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 find . -path "*/migrations/*.pyc"  -delete
 '''
@@ -44,9 +44,21 @@ class DogAccount(models.Model):
     petpublicnum = models.IntegerField(null = True, blank = True) # 등록번호
     petsex = models.CharField(null = True , blank = True , max_length=1, choices = PET_SEX_CHOICE) # 성별
     petdesex = models.CharField(null = True , blank = True, max_length=1, choices = PET_DESEX_CHOICE) # 중성화여부
-    petimage = models.ImageField(null=True, blank = True) # 사진
+    petimage = models.ImageField(null=True, blank = True, upload_to="photo/1") # 사진
+    registerimage = models.ImageField(upload_to='photo/2', null = True, blank = True) #비문 등록 사진
+    noseimage = models.ImageField(upload_to='photo/3', null = True, blank = True) #비문 사진
     noseprint = models.CharField(null=True, blank = True, max_length=1, choices = PET_NOSE_PRINT )#비문 등록 추가 여부
-    noseimage = models.ImageField(null = True, blank = True) #비문 사진
+
+    def __str__(self):
+        return self.petname
+    
 # class DgoNoseImage(models.Model):
 #     dogprofile = models.ForeignKey(DogAccount, on_delete=models.CASCADE, default='', related_name = 'weights')
 #     noseimage = models.ImageField()
+
+# class NosePrintDog(models.Model):
+#     id = models.AutoField(primary_key=True, null=False, blank=False) # PK 자동생성
+#     dogimage = models.ImageField(upload_to='photo/2', null = True, blank = True) 
+#     noseimages = models.ImageField(upload_to='images/', null = True, blank = True) #비문 사진
+#     dog = models.ForeignKey(DogAccount, null=False, blank=False, on_delete=models.CASCADE, default = '') # user foreign key
+#     user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE, default = '') # user foreign key

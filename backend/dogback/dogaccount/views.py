@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import DogAccount#, DogWeight
-from .serializers import Dog_accountSerializer
+from .models import DogAccount#, NosePrintDog#, DogWeight,
+from .serializers import Dog_accountSerializer#,NosePrintDogSerializer
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -8,7 +8,12 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from django.http import Http404
-#from yolov5 import detect as yolo
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+import yolov05.detect as yolo
+from rest_framework.decorators import action
+#import cv2
+
 # Create your views here.
 
 # 비문추출 값 추가
@@ -87,9 +92,57 @@ class DogDetail(APIView):
 class DogViewSet(viewsets.ModelViewSet): #viewset 활용 CRUD
     serializer_class = Dog_accountSerializer
     queryset = DogAccount.objects.all()
+
+    def update(self, request, pk):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user = self.request.user)
+            #DogAccount.objects.get(id = pk).noseprint = 1
+            if serializer.validated_data['registerimage'] != None:
+                #erializer.save(noseimage = )
+                serializer.save(noseprint = 1)
+            opt=yolo.parse_opt()
+            yolo.main(opt)
+            #serializer.save(user = self.request.user)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def perform_create(self, serializer):
-        #yolo.main(yolo.opt)
+       # yolo.main(yolo.opt)
         serializer.save(user = self.request.user)
+
+
+
+# class PrintViewSet(viewsets.ModelViewSet):
+#     serializer_class  = NosePrintDogSerializer
+#     queryset = NosePrintDog.objects.all()
+
+    # def create(self, request):
+    #     serializer = self.get_serializer(data=request.data) #models불러오기
+    #     print(NosePrintDog.objects.get(id=1).dogimage) 
+    #     #print(request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         print(NosePrintDog.objects.all())
+    #         # opt=yolo.parse_opt()
+    #         # yolo.main(opt)
+    #         #serializer.save(user = self.request.user)
+    #         return Response(serializer.data)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    
+
+
+# @csrf_exempt
+# def nose_print(request):
+#     if(request.method =='POST'):
+#         d= NosePrintDog()
+#         data = json.load(request)
+#         d.noseimages = data['noseimages']
+        
+#         pass
+#     pass
 
 
 # #몸무게 체크 및 목록 보내주는 함수

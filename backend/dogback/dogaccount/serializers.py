@@ -1,21 +1,15 @@
 from rest_framework import serializers
-from .models import DogAccount#, DogWeight
+from .models import DogAccount#, NosePrintDog#, DogWeight
 class Dog_accountSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source = 'user.username')
     class Meta:
-        fields = (
-            'id',
-            'petname',
-            'petyear',
-            'petspecies',
-            'petweight',
-            'petpublicnum',
-            'petsex',
-            'petdesex',
-            'petimage',
-            'noseprint',
-
-        )
         model = DogAccount
+        fields = ('id','petname','petyear','petspecies','petweight','petpublicnum','petsex','petimage','registerimage','noseimage','noseprint','user') 
+
+# class NosePrintDogSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         fields = ('id','dogimage','noseimages','dog','user')
+#         model = NosePrintDog
 
 # class DogWeightSerializer(serializers.ModelSerializer):
 #     class Meta:
